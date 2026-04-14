@@ -219,9 +219,53 @@
 
   /* Responsive styles */
   @media (max-width: 900px) {
-    .container { flex-direction: column; align-items: center; gap: 30px; }
-    .left-panel, .right-panel { flex: none; width: 100%; max-width: 600px; }
-    .miners-grid { flex-direction: column; }
+    .container {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+    .left-panel,
+    .right-panel {
+      flex: none;
+      width: 100%;
+      max-width: 600px;
+    }
+    .miners-grid {
+      flex-direction: column;
+    }
+    /* Make textarea more adaptable on mobile */
+    textarea {
+      height: auto;
+      min-height: 180px;
+    }
+    /* Reduce padding/margins for smaller screens */
+    .controls {
+      padding: 20px;
+    }
+    .card {
+      padding: 20px;
+    }
+    /* Make buttons and inputs more touch-friendly */
+    .add-btn {
+      padding: 10px 14px;
+      font-size: 20px;
+    }
+    /* Reduce font sizes if needed */
+    .controls h3 {
+      font-size: 16px;
+    }
+    .miner-box-header span {
+      font-size: 14px;
+    }
+    /* Adjust row padding for smaller screens */
+    .row {
+      padding: 10px 0;
+    }
+    /* Make sure input fields are easy to tap */
+    input, select {
+      font-size: 16px;
+      padding: 10px;
+    }
   }
 </style>
 </head>
