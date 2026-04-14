@@ -1,214 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>RollerCoin Power Calculator</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Reset and base styles */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #0c0f1c, #1a1f33);
-  color: #fff;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-}
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0c0f1c, #1a1f33);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
 
-.container {
-  display: flex;
-  gap: 60px;
-  max-width: 1300px;
-  width: 100%;
-  padding: 40px 20px;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
+  .container {
+    display: flex;
+    gap: 60px;
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 
-.left-panel { flex: 1 1 560px; min-width: 0; }
-.right-panel { flex: 0 1 420px; min-width: 280px; }
+  /* Left panel styles */
+  .left-panel { flex: 1 1 560px; min-width: 0; }
 
-.controls {
-  background: linear-gradient(145deg, #1f2340, #252a55);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  /* Right panel styles */
+  .right-panel { flex: 0 1 420px; min-width: 280px; }
 
-.controls h3 {
-  color: #7ea2ff;
-  font-size: 18px;
-  margin-bottom: 10px;
-  width: 100%;
-  text-align: center;
-}
+  /* Controls styling */
+  .controls {
+    background: linear-gradient(145deg, #1f2340, #252a55);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-textarea {
-  width: 100%;
-  height: 180px;
-  border-radius: 12px;
-  border: none;
-  background: #12182e;
-  color: #fff;
-  font-size: 14px;
-  padding: 12px;
-  resize: vertical;
-  margin-bottom: 24px;
-  outline: none;
-  line-height: 1.5;
-}
-textarea::placeholder { color: #7ea2ff; }
-textarea:focus { background: #1a203a; box-shadow: 0 0 15px #7ea2ff; }
+  .controls h3 {
+    color: #7ea2ff;
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
 
-.miners-grid {
-  display: flex;
-  gap: 16px;
-  width: 100%;
-  align-items: flex-start;
-}
+  textarea {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    border: none;
+    background: #12182e;
+    color: #fff;
+    font-size: 14px;
+    padding: 12px;
+    resize: vertical;
+    margin-bottom: 24px;
+    outline: none;
+    line-height: 1.5;
+  }
 
-.miner-box {
-  background: #12182e;
-  border-radius: 15px;
-  padding: 14px;
-  flex: 1;
-  min-width: 0;
-}
-.add-box      { border: 2px solid #7ea2ff; }
-.subtract-box { border: 2px solid #ff6b6b; }
+  textarea::placeholder { color: #7ea2ff; }
 
-.miner-box-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-.miner-box-header span { font-weight: bold; color: #fff; font-size: 15px; }
+  textarea:focus { background: #1a203a; box-shadow: 0 0 15px #7ea2ff; }
 
-.add-btn {
-  cursor: pointer;
-  background: #7ea2ff;
-  color: #0c0f1c;
-  border-radius: 6px;
-  padding: 2px 10px;
-  font-weight: bold;
-  border: none;
-  font-size: 18px;
-  line-height: 1.4;
-  transition: all 0.2s ease;
-}
-.subtract-box .add-btn { background: #ff6b6b; }
-.add-btn:hover { opacity: 0.85; }
+  /* Miners grid styles */
+  .miners-grid {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    align-items: flex-start;
+  }
 
-.miner-item {
-  position: relative;
-  padding: 10px 8px;
-  border-radius: 10px;
-  background: #0c1125;
-  margin-bottom: 8px;
-}
+  /* Miner box styles */
+  .miner-box {
+    background: #12182e;
+    border-radius: 15px;
+    padding: 14px;
+    flex: 1;
+    min-width: 0;
+  }
 
-.remove-btn {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  cursor: pointer;
-  color: #fff;
-  background: #ff4f4f;
-  width: 22px;
-  height: 22px;
-  font-size: 12px;
-  line-height: 22px;
-  text-align: center;
-  border-radius: 50%;
-  font-weight: bold;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  transition: all 0.2s ease;
-  z-index: 10;
-}
-.remove-btn:hover { background: #ff6b6b; transform: scale(1.2); }
+  /* Border styles for add/subtract boxes */
+  .add-box { border: 2px solid #7ea2ff; }
+  .subtract-box { border: 2px solid #ff6b6b; }
 
-.input-row { display: flex; gap: 6px; margin-bottom: 6px; }
-.input-row:last-child { margin-bottom: 0; }
+  /* Header styles for miner boxes */
+  .miner-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
 
-input, select {
-  flex: 1;
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: none;
-  background: #12182e;
-  color: #fff;
-  font-size: 14px;
-  outline: none;
-}
-input::placeholder { color: #555a7e; }
-input:focus, select:focus { background: #1a203a; box-shadow: 0 0 10px #7ea2ff44; }
-select { width: 80px; flex: none; cursor: pointer; }
+  .miner-box-header span {
+    font-weight: bold;
+    color: #fff;
+    font-size: 15px;
+  }
 
-.empty-hint { color: #555a7e; font-size: 13px; text-align: center; padding: 10px 0; }
+  /* Buttons styles */
+  .add-btn {
+    cursor: pointer;
+    background: #7ea2ff;
+    color: #0c0f1c;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-weight: bold;
+    border: none;
+    font-size: 18px;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+  }
 
-.card {
-  background: linear-gradient(145deg, #1f2340, #252a55);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-}
+  .subtract-box .add-btn { background: #ff6b6b; }
 
-.card h2 {
-  font-size: 26px;
-  color: #7ea2ff;
-  text-align: center;
-  margin-bottom: 24px;
-  letter-spacing: 1px;
-}
+  .add-btn:hover { opacity: 0.85; }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
+  /* Miner item styles */
+  .miner-item {
+    position: relative;
+    padding: 10px 8px;
+    border-radius: 10px;
+    background: #0c1125;
+    margin-bottom: 12px;
+  }
 
-.label { color: #a0b9ff; font-size: 17px; }
+  /* Remove button styles */
+  .remove-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    cursor: pointer;
+    color: #fff;
+    background: #ff4f4f;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+  }
 
-.value {
-  background: #12182e;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-weight: bold;
-  min-width: 140px;
-  text-align: right;
-  font-size: 16px;
-}
+  .remove-btn:hover { background: #ff6b6b; transform: scale(1.2); }
 
-#gain { color: #00ff99; text-shadow: 0 0 10px #00ff99, 0 0 25px #00ff99; }
-#gain.negative { color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b; }
+  /* Input row styles */
+  .input-row { display: flex; gap: 6px; margin-bottom: 6px; }
 
-@media (max-width: 900px) {
-  .container { flex-direction: column; align-items: center; gap: 30px; }
-  .left-panel, .right-panel { flex: none; width: 100%; max-width: 600px; }
-  .miners-grid { flex-direction: column; }
-}
+  /* Input and select styles */
+  input, select {
+    flex: 1;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    background: #12182e;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+  }
+
+  input::placeholder { color: #555a7e; }
+
+  input:focus, select:focus { background: #1a203a; box-shadow: 0 0 10px #7ea2ff44; }
+
+  select { width: 80px; flex: none; cursor: pointer; }
+
+  /* Main card styles */
+  .card {
+    background: linear-gradient(145deg, #1f2340, #252a55);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+  }
+
+  .card h2 {
+    font-size: 26px;
+    color: #7ea2ff;
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  /* Power info rows */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .label { color: #a0b9ff; font-size: 17px; }
+
+  .value {
+    background: #12182e;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    min-width: 140px;
+    text-align: right;
+    font-size: 16px;
+  }
+
+  #gain { color: #00ff99; text-shadow: 0 0 10px #00ff99, 0 0 25px #00ff99; }
+
+  #gain.negative { color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b; }
+
+  /* Responsive styles */
+  @media (max-width: 900px) {
+    .container { flex-direction: column; align-items: center; gap: 30px; }
+    .left-panel, .right-panel { flex: none; width: 100%; max-width: 600px; }
+    .miners-grid { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
-
 <div class="container">
-
+  <!-- Left Panel -->
   <div class="left-panel">
     <div class="controls">
       <h3>Paste Stats</h3>
       <textarea id="raw_data" placeholder="Paste your RollerCoin stats here..."></textarea>
-
       <h3 style="margin-bottom:14px">Modify Power</h3>
       <div class="miners-grid">
-
+        <!-- Add Miners Box -->
         <div class="miner-box add-box">
           <div class="miner-box-header">
             <span>➕ Add</span>
@@ -218,7 +244,7 @@ select { width: 80px; flex: none; cursor: pointer; }
             <div class="empty-hint">Press + to add a miner</div>
           </div>
         </div>
-
+        <!-- Subtract Miners Box -->
         <div class="miner-box subtract-box">
           <div class="miner-box-header">
             <span>➖ Subtract</span>
@@ -228,11 +254,10 @@ select { width: 80px; flex: none; cursor: pointer; }
             <div class="empty-hint">Press + to add a miner</div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
+  <!-- Right Panel -->
   <div class="right-panel">
     <div class="card">
       <h2>⚡ My Power</h2>
@@ -245,12 +270,11 @@ select { width: 80px; flex: none; cursor: pointer; }
       <div class="row"><span class="label">Temporary</span><span class="value" id="temp">0.000 Th/s</span></div>
     </div>
   </div>
-
 </div>
-
 <script>
 let minerId = 0;
 
+// Utility functions
 function toTh(str) {
   let m = str.match(/([\d,.]+)\s*([EGPTHG])h\/s/i);
   if (!m) {
@@ -259,19 +283,26 @@ function toTh(str) {
     return 0;
   }
   let val = parseFloat(m[1].replace(/,/g, "")), unit = m[2].toUpperCase();
-  if (unit === "E") return val * 1000000;
-  if (unit === "P") return val * 1000;
+  if (unit === "E") return val * 1e6;
+  if (unit === "P") return val * 1e3;
   if (unit === "T") return val;
   if (unit === "G") return val / 1000;
+  if (unit === "H") return val; // fallback
   return val;
 }
 
 function fromTh(th) {
-  if (!isFinite(th)) return "0.000 Th/s";
-  if (th >= 1e6) return (th / 1e6).toFixed(3) + " Eh/s";
-  if (th >= 1e3) return (th / 1e3).toFixed(3) + " Ph/s";
-  if (th < 1 && th !== 0) return (th * 1000).toFixed(3) + " Gh/s";
-  return th.toFixed(3) + " Th/s";
+  if (!isFinite(th)) return { value: 0, unit: 'Th/s' };
+  let absTh = Math.abs(th);
+  if (absTh >= 1e6) {
+    return { value: th / 1e6, unit: 'Eh/s' };
+  } else if (absTh >= 1e3) {
+    return { value: th / 1e3, unit: 'Ph/s' };
+  } else if (absTh < 1 && absTh !== 0) {
+    return { value: th * 1000, unit: 'Gh/s' };
+  } else {
+    return { value: th, unit: 'Th/s' };
+  }
 }
 
 function parseInputPower(str, unit) {
@@ -297,24 +328,36 @@ function parseStats(text) {
   let buffer = "";
   text.split("\n").map(l => l.trim()).forEach(l => {
     if (l) buffer += " " + l;
-    if (l.match(/[\d,.]+\s*[EPTGH]h\/s|[\d.]+%/i)) {
+    if (/[\d,.]+\s*[EPTGH]h\/s|[\d.]+%/i.test(l)) {
       let line = buffer.toLowerCase(); buffer = "";
-      if (/miner/i.test(line)) { let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i); if (v) data.miners = toTh(v[0]); }
-      else if (/rack/i.test(line)) { let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i); if (v) data.rack = toTh(v[0]); }
-      else if (/game/i.test(line)) { let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i); if (v) data.games = toTh(v[0]); }
-      else if (/temp/i.test(line)) { let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i); if (v) data.temp = toTh(v[0]); }
-      let p = line.match(/([+-]?[\d.]+)%/); if (p) data.bonus_pct += parseFloat(p[0]);
+      if (/miner/i.test(line)) {
+        let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i);
+        if (v) data.miners = toTh(v[0]);
+      } else if (/rack/i.test(line)) {
+        let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i);
+        if (v) data.rack = toTh(v[0]);
+      } else if (/game/i.test(line)) {
+        let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i);
+        if (v) data.games = toTh(v[0]);
+      } else if (/temp/i.test(line)) {
+        let v = line.match(/[\d,.]+\s*[eptgh]h\/s/i);
+        if (v) data.temp = toTh(v[0]);
+      }
+      let p = line.match(/([+-]?[\d.]+)%/);
+      if (p) data.bonus_pct += parseFloat(p[0]);
     }
   });
   return data;
 }
 
+// Add miner functions
 function addMiner(type) {
-  let list = document.getElementById(type + "-list");
-  let hint = list.querySelector(".empty-hint");
+  const listId = type + "-list";
+  const list = document.getElementById(listId);
+  const hint = list.querySelector(".empty-hint");
   if (hint) hint.remove();
 
-  let div = document.createElement("div");
+  const div = document.createElement("div");
   div.className = "miner-item";
   div.dataset.type = type;
   div.innerHTML = `
@@ -341,12 +384,12 @@ function addMiner(type) {
 }
 
 function removeMiner(btn) {
-  let item = btn.closest(".miner-item");
-  let type = item.dataset.type;
-  let list = document.getElementById(type + "-list");
+  const item = btn.closest(".miner-item");
+  const type = item.dataset.type;
+  const list = document.getElementById(type + "-list");
   item.remove();
   if (list.querySelectorAll(".miner-item").length === 0) {
-    let hint = document.createElement("div");
+    const hint = document.createElement("div");
     hint.className = "empty-hint";
     hint.textContent = "Press + to add a miner";
     list.appendChild(hint);
@@ -354,43 +397,54 @@ function removeMiner(btn) {
   calculate();
 }
 
+// Calculation function
 function calculate() {
-  let stats = parseStats(document.getElementById("raw_data").value);
+  const statsText = document.getElementById("raw_data").value;
+  const stats = parseStats(statsText);
   let totalPower = 0, totalBonus = 0, totalRackSum = 0;
 
   document.querySelectorAll(".miner-item").forEach(item => {
-    let type = item.dataset.type;
-    let p = parseInputPower(item.querySelector(".nm_power").value, item.querySelector(".nm_unit").value);
-    let b = parseFloat(item.querySelector(".nm_bonus").value) || 0;
-    let r = parseFloat(item.querySelector(".nm_rack").value) || 0;
+    const type = item.dataset.type;
+    const powerStr = item.querySelector(".nm_power").value;
+    const unit = item.querySelector(".nm_unit").value;
+    const bonusStr = item.querySelector(".nm_bonus").value;
+    const rackStr = item.querySelector(".nm_rack").value;
+
+    let p = parseInputPower(powerStr, unit);
+    let b = parseFloat(bonusStr) || 0;
+    let r = parseFloat(rackStr) || 0;
+
     if (type === "subtract") { p *= -1; b *= -1; }
+
     totalPower += p;
     totalBonus += b;
     totalRackSum += p * (r / 100);
   });
 
-  let finalMiners = stats.miners + totalPower;
-  let finalBonusPct = stats.bonus_pct + totalBonus;
-  let bonusVal = finalMiners * finalBonusPct / 100;
-  let finalRack = stats.rack + totalRackSum;
-  let total = finalMiners + bonusVal + finalRack + stats.games + stats.temp;
-  let baseTotal = stats.miners + (stats.miners * stats.bonus_pct / 100) + stats.rack + stats.games + stats.temp;
-  let gain = total - baseTotal;
+  const finalMiners = stats.miners + totalPower;
+  const finalBonusPct = stats.bonus_pct + totalBonus;
+  const bonusVal = finalMiners * finalBonusPct / 100;
+  const finalRack = stats.rack + totalRackSum;
 
-  document.getElementById("current").textContent = fromTh(total);
-  let gainEl = document.getElementById("gain");
-  gainEl.textContent = (gain >= 0 ? "+" : "") + fromTh(gain);
-  gainEl.className = gain >= 0 ? "value" : "value negative";
-  document.getElementById("miners").textContent = fromTh(finalMiners);
-  document.getElementById("bonus").textContent = finalBonusPct.toFixed(2) + "% / " + fromTh(bonusVal);
-  document.getElementById("rack").textContent = fromTh(finalRack);
-  document.getElementById("games").textContent = fromTh(stats.games);
-  document.getElementById("temp").textContent = fromTh(stats.temp);
+  const total = finalMiners + bonusVal + finalRack + stats.games + stats.temp;
+  const baseTotal = stats.miners + (stats.miners * stats.bonus_pct / 100) + stats.rack + stats.games + stats.temp;
+  const gain = total - baseTotal;
+
+  // Update DOM
+  document.getElementById("current").textContent = fromTh(total).value.toFixed(3) + " " + fromTh(total).unit;
+  const gainData = fromTh(gain);
+  document.getElementById("gain").textContent = (gain >= 0 ? "+" : "") + gainData.value.toFixed(3) + " " + gainData.unit;
+  document.getElementById("gain").className = "value" + (gain < 0 ? " negative" : "");
+  document.getElementById("miners").textContent = fromTh(finalMiners).value.toFixed(3) + " " + fromTh(finalMiners).unit;
+  document.getElementById("bonus").textContent = finalBonusPct.toFixed(2) + "% / " + fromTh(bonusVal).value.toFixed(3) + " " + fromTh(bonusVal).unit;
+  document.getElementById("rack").textContent = fromTh(finalRack).value.toFixed(3) + " " + fromTh(finalRack).unit;
+  document.getElementById("games").textContent = fromTh(stats.games).value.toFixed(3) + " " + fromTh(stats.games).unit;
+  document.getElementById("temp").textContent = fromTh(stats.temp).value.toFixed(3) + " " + fromTh(stats.temp).unit;
 }
 
+// Event listeners
 document.getElementById("raw_data").addEventListener("input", calculate);
 window.addEventListener("load", calculate);
 </script>
-
 </body>
 </html>
